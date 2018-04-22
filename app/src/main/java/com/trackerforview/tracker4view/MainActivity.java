@@ -39,15 +39,15 @@ public class MainActivity extends AppCompatActivity {
     List<ScanResult> wifiList;
     WifiManager wifi;
     ImageView img_fondo;
-    Button btn_calibrar;
+    Button btn_redes;
     EditText edt_calibrar;
     int decibelios = -41;
 
     // Módulos Wifi ESP8266 E01
     //------------------------------------------------
-    final String aula101 = "a2:20:a6:01:6c:27"; // "90:67:1c:70:ef:18";//
-    final String aula102 = "a2:20:a6:10:81:e5";
-    final String aula103 = "a2:20:a6:12:c2:7d";
+    final String aula101 = "a2:20:a6:01:6c:27"; // "90:67:1c:70:ef:18";
+    final String aula102 = "a2:20:a6:12:c2:7d";
+    final String aula103 = "62:01:94:3a:68:bf";
     //------------------------------------------------
 
     //Banderas de aulas
@@ -197,11 +197,11 @@ public class MainActivity extends AppCompatActivity {
         wifi.startScan();
         tv_redes.setText("Buscando Redes Wifi");
 
-        btn_calibrar = findViewById(R.id.btn_calibrar);
+        btn_redes = findViewById(R.id.btn_redes);
         img_fondo = findViewById(R.id.img_fondo);
         edt_calibrar = findViewById(R.id.edt_calibrar);
 
-        btn_calibrar.setOnClickListener(new View.OnClickListener() {
+        btn_redes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 img_fondo.setVisibility(View.VISIBLE);
@@ -211,7 +211,7 @@ public class MainActivity extends AppCompatActivity {
                 decibelios = -Integer.parseInt(dlb);
             }
         });
-        btn_calibrar.setOnLongClickListener(new View.OnLongClickListener() {
+        btn_redes.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
                 img_fondo.setVisibility(View.GONE);
