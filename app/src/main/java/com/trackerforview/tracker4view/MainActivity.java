@@ -24,7 +24,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -40,20 +39,48 @@ public class MainActivity extends AppCompatActivity {
     WifiManager wifi;
     ImageView img_fondo;
     Button btn_redes;
-    EditText edt_calibrar;
-    int decibelios = -41;
+    int decibelios = -45;
 
     // Módulos Wifi ESP8266 E01
-    //------------------------------------------------
-    final String aula101 = "a2:20:a6:01:6c:27"; // "90:67:1c:70:ef:18";
-    final String aula102 = "a2:20:a6:12:c2:7d";
-    final String aula103 = "62:01:94:3a:68:bf";
+    final String adecanato = "62:01:94:3a:6a:5b";
+    final String bmujeres102 = "62:01:94:3a:6c:b0";
+    final String bhombres = "62:01:94:3a:67:7e";
+    final String aula104 = "62:01:94:3a:68:bf";
+    final String aula105 = "62:01:94:3a:6a:61";
+    final String aula106 = "62:01:94:3a:6a:31";
+    final String aula201 = "62:01:94:3a:67:89";
+    final String aula202 = "62:01:94:3a:67:7b";
+    final String aula203 = "62:01:94:3a:67:9c";
+    final String aula204 = "62:01:94:3a:65:f3";
+    final String aula205 = "62:01:94:3a:67:93";
+    final String aula206 = "62:01:94:3a:6a:54";
+    final String aula301 = "62:01:94:3a:6a:5c";
+    final String aula302 = "62:01:94:3a:66:3f";
+    final String aula303 = "62:01:94:3a:68:cb";
+    final String aula304 = "62:01:94:3a:68:52";
+    final String aula305 = "62:01:94:3a:67:91";
+    final String aula306 = "62:01:94:3a:68:c5";
     //------------------------------------------------
 
-    //Banderas de aulas
-    public int a101 = 1;
-    public int a102 = 1;
-    public int a103 = 1;
+    // Banderas de aulas
+    public int bdecanato = 1;
+    public int bbmujeres102 = 1;
+    public int bbhombres = 1;
+    public int a104 = 1;
+    public int a105 = 1;
+    public int a106 = 1;
+    public int a201 = 1;
+    public int a202 = 1;
+    public int a203 = 1;
+    public int a204 = 1;
+    public int a205 = 1;
+    public int a206 = 1;
+    public int a301 = 1;
+    public int a302 = 1;
+    public int a303 = 1;
+    public int a304 = 1;
+    public int a305 = 1;
+    public int a306 = 1;
     //-------------------------------------------------
 
 
@@ -100,53 +127,145 @@ public class MainActivity extends AppCompatActivity {
         public void onReceive(Context context, Intent intent) {
             sb = new StringBuilder();
             wifiList = wifi.getScanResults();
-            sb.append("\nRedes Wifi: ").append(wifiList.size()).append("\n\n");
 
             for (int i=0; i<wifiList.size(); i++) {
-                sb.append(Integer.toString(i + 1)).append("- Red-> ");
-                String ssid_red = wifiList.get(i).SSID;
                 int dbl_red = wifiList.get(i).level;
                 String bssid_red = wifiList.get(i).BSSID;
 
-                ///////////////////////////////////////////////////////////
-                if (bssid_red.equals(aula101) && dbl_red >= decibelios && a101 ==1) {
-                    playaudio(context, R.raw.aula_101);
-                    playaudio(context, R.raw.aula_101);
-                    //hilovibrar();
-                    a101=0;
-                    a102=1;
-                    a103=1;
+                /// == Condiciones para reproducir los audios de cada aula == ///
+                if (bssid_red.equals(adecanato) && dbl_red >= decibelios && bdecanato == 1) {
+                    playaudio(context, R.raw.decanato);
+                    playaudio(context, R.raw.decanato);
+                    bdecanato = 0;
                 }
 
-                if (bssid_red.equals(aula102) && dbl_red >= decibelios && a102 ==1) {
-                    playaudio(context, R.raw.aula_102);
-                    playaudio(context, R.raw.aula_102);
-                    //hilovibrar();
-                    a101=1;
-                    a102=0;
-                    a103=1;
+                if (bssid_red.equals(bmujeres102) && dbl_red >= decibelios && bbmujeres102 == 1) {
+                    playaudio(context, R.raw.bmujeres_102);
+                    playaudio(context, R.raw.bmujeres_102);
+                    bbmujeres102 = 0;
                 }
 
-                if (bssid_red.equals(aula103) && dbl_red >= decibelios && a103 ==1) {
-                    playaudio(context, R.raw.aula_103);
-                    playaudio(context, R.raw.aula_103);
-                    //hilovibrar();
-                    a101=1;
-                    a102=1;
-                    a103=0;
+                if (bssid_red.equals(bhombres) && dbl_red >= decibelios && bbhombres == 1) {
+                    playaudio(context, R.raw.bhombres);
+                    playaudio(context, R.raw.bhombres);
+                    bbhombres = 0;
                 }
 
-                if (ssid_red.equals("")) {
-                    sb.append(" -- Red Oculta -- ");
-                    //continue;
-                } else {
-                    sb.append(ssid_red);
+                if (bssid_red.equals(aula104) && dbl_red >= decibelios && a104 == 1) {
+                    playaudio(context, R.raw.aula_104);
+                    playaudio(context, R.raw.aula_104);
+                    a104 = 0;
                 }
-                sb.append("\n\n");
-                sb.append(dbl_red);
-                sb.append("\n\n");
-                sb.append(bssid_red.toUpperCase());
-                sb.append("\n\n");
+
+                if (bssid_red.equals(aula105) && dbl_red >= decibelios && a105 == 1) {
+                    playaudio(context, R.raw.aula_105);
+                    playaudio(context, R.raw.aula_105);
+                    a105 = 0;
+                }
+
+                if (bssid_red.equals(aula106) && dbl_red >= decibelios && a106 == 1) {
+                    playaudio(context, R.raw.aula_106);
+                    playaudio(context, R.raw.aula_106);
+                    a106 = 0;
+                }
+
+                if (bssid_red.equals(aula201) && dbl_red >= decibelios && a201 == 1) {
+                    playaudio(context, R.raw.aula_201);
+                    playaudio(context, R.raw.aula_201);
+                    a201 = 0;
+                }
+
+                if (bssid_red.equals(aula202) && dbl_red >= decibelios && a202 == 1) {
+                    playaudio(context, R.raw.aula_202);
+                    playaudio(context, R.raw.aula_202);
+                    a202 = 0;
+                }
+
+                if (bssid_red.equals(aula203) && dbl_red >= decibelios && a203 == 1) {
+                    playaudio(context, R.raw.aula_203);
+                    playaudio(context, R.raw.aula_203);
+                    a203 = 0;
+                }
+
+                if (bssid_red.equals(aula204) && dbl_red >= decibelios && a204 == 1) {
+                    playaudio(context, R.raw.aula_204);
+                    playaudio(context, R.raw.aula_204);
+                    a204 = 0;
+                }
+
+                if (bssid_red.equals(aula205) && dbl_red >= decibelios && a205 == 1) {
+                    playaudio(context, R.raw.aula_205);
+                    playaudio(context, R.raw.aula_205);
+                    a205 = 0;
+                }
+
+                if (bssid_red.equals(aula206) && dbl_red >= decibelios && a206 == 1) {
+                    playaudio(context, R.raw.aula_206);
+                    playaudio(context, R.raw.aula_206);
+                    a206 = 0;
+                }
+
+                if (bssid_red.equals(aula301) && dbl_red >= decibelios && a301 == 1) {
+                    playaudio(context, R.raw.aula_301);
+                    playaudio(context, R.raw.aula_301);
+                    a301 = 0;
+                }
+
+                if (bssid_red.equals(aula302) && dbl_red >= decibelios && a302 == 1) {
+                    playaudio(context, R.raw.aula_302);
+                    playaudio(context, R.raw.aula_302);
+                    a302 = 0;
+                }
+
+                if (bssid_red.equals(aula303) && dbl_red >= decibelios && a303 == 1) {
+                    playaudio(context, R.raw.aula_303);
+                    playaudio(context, R.raw.aula_303);
+                    a303 = 0;
+                }
+
+                if (bssid_red.equals(aula304) && dbl_red >= decibelios && a304 == 1) {
+                    playaudio(context, R.raw.aula_304);
+                    playaudio(context, R.raw.aula_304);
+                    a304 = 0;
+                }
+
+                if (bssid_red.equals(aula305) && dbl_red >= decibelios && a305 == 1) {
+                    playaudio(context, R.raw.aula_305);
+                    playaudio(context, R.raw.aula_305);
+                    a305 = 0;
+                }
+
+                if (bssid_red.equals(aula306) && dbl_red >= decibelios && a306 == 1) {
+                    playaudio(context, R.raw.aula_306);
+                    playaudio(context, R.raw.aula_306);
+                    a306 = 0;
+                }
+
+                /// == Para que solo se muestren los datos de las redes de los módulos == ///
+                if (bssid_red.equals(adecanato) ||
+                    bssid_red.equals(bmujeres102) ||
+                    bssid_red.equals(bhombres) ||
+                    bssid_red.equals(aula104) ||
+                    bssid_red.equals(aula105) ||
+                    bssid_red.equals(aula106) ||
+                    bssid_red.equals(aula201) ||
+                    bssid_red.equals(aula202) ||
+                    bssid_red.equals(aula203) ||
+                    bssid_red.equals(aula204) ||
+                    bssid_red.equals(aula205) ||
+                    bssid_red.equals(aula206) ||
+                    bssid_red.equals(aula301) ||
+                    bssid_red.equals(aula302) ||
+                    bssid_red.equals(aula303) ||
+                    bssid_red.equals(aula304) ||
+                    bssid_red.equals(aula305) ||
+                    bssid_red.equals(aula306)) {
+                        sb.append("╔════════════════════════╗").append("\n║  ");
+                        sb.append("  << Módulo ESP >>    ").append("║\n║ Mac: ");
+                        sb.append(bssid_red.toUpperCase()).append(" ║\n║ dB: ");
+                        sb.append(dbl_red).append("                ║\n");
+                        sb.append("╚════════════════════════╝\n");
+                }
             }
             tv_redes.setText(sb);
             wifiList.clear();
@@ -199,16 +318,13 @@ public class MainActivity extends AppCompatActivity {
 
         btn_redes = findViewById(R.id.btn_redes);
         img_fondo = findViewById(R.id.img_fondo);
-        edt_calibrar = findViewById(R.id.edt_calibrar);
 
         btn_redes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 img_fondo.setVisibility(View.VISIBLE);
                 tv_redes.setVisibility(View.GONE);
-                edt_calibrar.setVisibility(View.GONE);
-                String dlb = edt_calibrar.getText().toString();
-                decibelios = -Integer.parseInt(dlb);
+                btn_redes.setText("MOSTRAR REDES");
             }
         });
         btn_redes.setOnLongClickListener(new View.OnLongClickListener() {
@@ -216,7 +332,7 @@ public class MainActivity extends AppCompatActivity {
             public boolean onLongClick(View view) {
                 img_fondo.setVisibility(View.GONE);
                 tv_redes.setVisibility(View.VISIBLE);
-                edt_calibrar.setVisibility(View.VISIBLE);
+                btn_redes.setText("OCULTAR REDES");
                 return true;
             }
         });
