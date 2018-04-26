@@ -41,8 +41,8 @@ public class MainActivity extends AppCompatActivity {
     Button btn_redes;
     int decibelios = -45;
 
-    // Módulos Wifi ESP8266 E01
-    final String adecanato = "62:01:94:3a:6a:5b";
+    // Módulos Wifi ESP8266 E01 //  mi router -> "50:c7:bf:71:3f:82";
+    final String adecanato = "50:c7:bf:71:3f:82";//"62:01:94:3a:6a:5b";
     final String bmujeres102 = "62:01:94:3a:6c:b0";
     final String bhombres = "62:01:94:3a:67:7e";
     final String aula104 = "62:01:94:3a:68:bf";
@@ -93,33 +93,30 @@ public class MainActivity extends AppCompatActivity {
                 play.release();
         }
 
-        public void hilo() {
+        public void hilodelay() {
             try {
-                Thread.sleep(3000);
+                Thread.sleep(4000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
 
-        public void hilovibrar() {
-            try {
-                Thread.sleep(1500);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-
-        public void playaudio(Context context, int audio){
-            final Vibrator vibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
-            destruir();
-            play = MediaPlayer.create(getApplicationContext(), audio);
-            assert vibrator != null;
-            vibrator.vibrate(400);
-            play.start();
-            hilo();
-            vibrator.vibrate(400);
-            hilovibrar();
-            play.stop();
+        public void playaudio(final Context context, final int audio){
+            Thread playThread = new Thread() {
+                public void run() {
+                    final Vibrator vibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
+                    destruir();
+                    play = MediaPlayer.create(getApplicationContext(), audio);
+                    assert vibrator != null;
+                    vibrator.vibrate(350);
+                    play.start();
+                    hilodelay();
+                    vibrator.vibrate(350);
+                    play.stop();
+                    destruir();
+                }
+            };
+            playThread.start();
         }
 
         // Escaneo de redes wifi
@@ -133,116 +130,138 @@ public class MainActivity extends AppCompatActivity {
                 String bssid_red = wifiList.get(i).BSSID;
 
                 /// == Condiciones para reproducir los audios de cada aula == ///
-                if (bssid_red.equals(adecanato) && dbl_red >= decibelios && bdecanato == 1) {
-                    playaudio(context, R.raw.decanato);
-                    playaudio(context, R.raw.decanato);
-                    bdecanato = 0;
-                }
+                switch (bssid_red){
+                    case adecanato:
+                        if (dbl_red >= decibelios && bdecanato == 1){
+                            playaudio(context, R.raw.decanato);
+                            bdecanato = 0;
+                        } else if (dbl_red < (decibelios -15)) bdecanato = 1;
+                        break;
 
-                if (bssid_red.equals(bmujeres102) && dbl_red >= decibelios && bbmujeres102 == 1) {
-                    playaudio(context, R.raw.bmujeres_102);
-                    playaudio(context, R.raw.bmujeres_102);
-                    bbmujeres102 = 0;
-                }
+                    case bmujeres102:
+                        if (dbl_red >= decibelios && bbmujeres102 == 1){
+                            playaudio(context, R.raw.bmujeres_102);
+                            bbmujeres102 = 0;
+                        } else if (dbl_red < (decibelios -15)) bbmujeres102 = 1;
+                        break;
 
-                if (bssid_red.equals(bhombres) && dbl_red >= decibelios && bbhombres == 1) {
-                    playaudio(context, R.raw.bhombres);
-                    playaudio(context, R.raw.bhombres);
-                    bbhombres = 0;
-                }
+                    case bhombres:
+                        if (dbl_red >= decibelios && bbhombres == 1){
+                            playaudio(context, R.raw.bhombres);
+                            bbhombres = 0;
+                        } else if (dbl_red < (decibelios -15)) bbhombres = 1;
+                        break;
 
-                if (bssid_red.equals(aula104) && dbl_red >= decibelios && a104 == 1) {
-                    playaudio(context, R.raw.aula_104);
-                    playaudio(context, R.raw.aula_104);
-                    a104 = 0;
-                }
+                    case aula104:
+                        if (dbl_red >= decibelios && a104 == 1){
+                            playaudio(context, R.raw.aula_104);
+                            a104 = 0;
+                        } else if (dbl_red < (decibelios -15)) a104 = 1;
+                        break;
 
-                if (bssid_red.equals(aula105) && dbl_red >= decibelios && a105 == 1) {
-                    playaudio(context, R.raw.aula_105);
-                    playaudio(context, R.raw.aula_105);
-                    a105 = 0;
-                }
+                    case aula105:
+                        if (dbl_red >= decibelios && a105 == 1){
+                            playaudio(context, R.raw.aula_105);
+                            a105 = 0;
+                        } else if (dbl_red < (decibelios -15)) a105 = 1;
+                        break;
 
-                if (bssid_red.equals(aula106) && dbl_red >= decibelios && a106 == 1) {
-                    playaudio(context, R.raw.aula_106);
-                    playaudio(context, R.raw.aula_106);
-                    a106 = 0;
-                }
+                    case aula106:
+                        if (dbl_red >= decibelios && a106 == 1){
+                            playaudio(context, R.raw.aula_106);
+                            a106 = 0;
+                        } else if (dbl_red < (decibelios -15)) a106 = 1;
+                        break;
 
-                if (bssid_red.equals(aula201) && dbl_red >= decibelios && a201 == 1) {
-                    playaudio(context, R.raw.aula_201);
-                    playaudio(context, R.raw.aula_201);
-                    a201 = 0;
-                }
+                    case aula201:
+                        if (dbl_red >= decibelios && a201 == 1){
+                            playaudio(context, R.raw.aula_201);
+                            a201 = 0;
+                        } else if (dbl_red < (decibelios -15)) a201 = 1;
+                        break;
 
-                if (bssid_red.equals(aula202) && dbl_red >= decibelios && a202 == 1) {
-                    playaudio(context, R.raw.aula_202);
-                    playaudio(context, R.raw.aula_202);
-                    a202 = 0;
-                }
+                    case aula202:
+                        if (dbl_red >= decibelios && a202 == 1){
+                            playaudio(context, R.raw.aula_202);
+                            a202 = 0;
+                        } else if (dbl_red < (decibelios -15)) a202 = 1;
+                        break;
 
-                if (bssid_red.equals(aula203) && dbl_red >= decibelios && a203 == 1) {
-                    playaudio(context, R.raw.aula_203);
-                    playaudio(context, R.raw.aula_203);
-                    a203 = 0;
-                }
+                    case aula203:
+                        if (dbl_red >= decibelios && a203 == 1){
+                            playaudio(context, R.raw.aula_203);
+                            a203 = 0;
+                        } else if (dbl_red < (decibelios -15)) a203 = 1;
+                        break;
 
-                if (bssid_red.equals(aula204) && dbl_red >= decibelios && a204 == 1) {
-                    playaudio(context, R.raw.aula_204);
-                    playaudio(context, R.raw.aula_204);
-                    a204 = 0;
-                }
+                    case aula204:
+                        if (dbl_red >= decibelios && a204 == 1){
+                            playaudio(context, R.raw.aula_204);
+                            a204 = 0;
+                        } else if (dbl_red < (decibelios -15)) a204 = 1;
+                        break;
 
-                if (bssid_red.equals(aula205) && dbl_red >= decibelios && a205 == 1) {
-                    playaudio(context, R.raw.aula_205);
-                    playaudio(context, R.raw.aula_205);
-                    a205 = 0;
-                }
+                    case aula205:
+                        if (dbl_red >= decibelios && a205 == 1){
+                            playaudio(context, R.raw.aula_205);
+                            a205 = 0;
+                        } else if (dbl_red < (decibelios -15)) a205 = 1;
+                        break;
 
-                if (bssid_red.equals(aula206) && dbl_red >= decibelios && a206 == 1) {
-                    playaudio(context, R.raw.aula_206);
-                    playaudio(context, R.raw.aula_206);
-                    a206 = 0;
-                }
+                    case aula206:
+                        if (dbl_red >= decibelios && a206 == 1){
+                            playaudio(context, R.raw.aula_206);
+                            a206 = 0;
+                        } else if (dbl_red < (decibelios -15)) a206 = 1;
+                        break;
 
-                if (bssid_red.equals(aula301) && dbl_red >= decibelios && a301 == 1) {
-                    playaudio(context, R.raw.aula_301);
-                    playaudio(context, R.raw.aula_301);
-                    a301 = 0;
-                }
+                    case aula301:
+                        if (dbl_red >= decibelios && a301 == 1){
+                            playaudio(context, R.raw.aula_301);
+                            a301 = 0;
+                        } else if (dbl_red < (decibelios -15)) a301 = 1;
+                        break;
 
-                if (bssid_red.equals(aula302) && dbl_red >= decibelios && a302 == 1) {
-                    playaudio(context, R.raw.aula_302);
-                    playaudio(context, R.raw.aula_302);
-                    a302 = 0;
-                }
+                    case aula302:
+                        if (dbl_red >= decibelios && a302 == 1){
+                            playaudio(context, R.raw.aula_302);
+                            a302 = 0;
+                        } else if (dbl_red < (decibelios -15)) a302 = 1;
+                        break;
 
-                if (bssid_red.equals(aula303) && dbl_red >= decibelios && a303 == 1) {
-                    playaudio(context, R.raw.aula_303);
-                    playaudio(context, R.raw.aula_303);
-                    a303 = 0;
-                }
+                    case aula303:
+                        if (dbl_red >= decibelios && a303 == 1){
+                            playaudio(context, R.raw.aula_303);
+                            a303 = 0;
+                        } else if (dbl_red < (decibelios -15)) a303 = 1;
+                        break;
 
-                if (bssid_red.equals(aula304) && dbl_red >= decibelios && a304 == 1) {
-                    playaudio(context, R.raw.aula_304);
-                    playaudio(context, R.raw.aula_304);
-                    a304 = 0;
-                }
+                    case aula304:
+                        if (dbl_red >= decibelios && a304 == 1){
+                            playaudio(context, R.raw.aula_304);
+                            a304 = 0;
+                        } else if (dbl_red < (decibelios -15)) a304 = 1;
+                        break;
 
-                if (bssid_red.equals(aula305) && dbl_red >= decibelios && a305 == 1) {
-                    playaudio(context, R.raw.aula_305);
-                    playaudio(context, R.raw.aula_305);
-                    a305 = 0;
-                }
+                    case aula305:
+                        if (dbl_red >= decibelios && a305 == 1){
+                            playaudio(context, R.raw.aula_305);
+                            a305 = 0;
+                        } else if (dbl_red < (decibelios -15)) a305 = 1;
+                        break;
 
-                if (bssid_red.equals(aula306) && dbl_red >= decibelios && a306 == 1) {
-                    playaudio(context, R.raw.aula_306);
-                    playaudio(context, R.raw.aula_306);
-                    a306 = 0;
+                    case aula306:
+                        if (dbl_red >= decibelios && a306 == 1){
+                            playaudio(context, R.raw.aula_306);
+                            a306 = 0;
+                        } else if (dbl_red < (decibelios -15)) a306 = 1;
+                        break;
+
+                    default: break;
                 }
 
                 /// == Para que solo se muestren los datos de las redes de los módulos == ///
-                if (bssid_red.equals(adecanato) ||
+               if (bssid_red.equals(adecanato) ||
                     bssid_red.equals(bmujeres102) ||
                     bssid_red.equals(bhombres) ||
                     bssid_red.equals(aula104) ||
