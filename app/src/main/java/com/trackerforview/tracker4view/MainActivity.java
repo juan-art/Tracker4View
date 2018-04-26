@@ -101,6 +101,14 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
+        public void appendered(int dbl_red, String bssid_red){
+            sb.append("╔════════════════════════╗").append("\n║  ");
+            sb.append("  << Módulo ESP >>    ").append("║\n║ Mac: ");
+            sb.append(bssid_red.toUpperCase()).append(" ║\n║ dB: ");
+            sb.append(dbl_red).append("                ║\n");
+            sb.append("╚════════════════════════╝\n");
+        }
+
         public void playaudio(final Context context, final int audio){
             Thread playThread = new Thread() {
                 public void run() {
@@ -132,6 +140,7 @@ public class MainActivity extends AppCompatActivity {
                 /// == Condiciones para reproducir los audios de cada aula == ///
                 switch (bssid_red){
                     case adecanato:
+                        appendered(dbl_red, bssid_red);
                         if (dbl_red >= decibelios && bdecanato == 1){
                             playaudio(context, R.raw.decanato);
                             bdecanato = 0;
@@ -139,6 +148,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
 
                     case bmujeres102:
+                        appendered(dbl_red, bssid_red);
                         if (dbl_red >= decibelios && bbmujeres102 == 1){
                             playaudio(context, R.raw.bmujeres_102);
                             bbmujeres102 = 0;
@@ -146,6 +156,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
 
                     case bhombres:
+                        appendered(dbl_red, bssid_red);
                         if (dbl_red >= decibelios && bbhombres == 1){
                             playaudio(context, R.raw.bhombres);
                             bbhombres = 0;
@@ -153,6 +164,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
 
                     case aula104:
+                        appendered(dbl_red, bssid_red);
                         if (dbl_red >= decibelios && a104 == 1){
                             playaudio(context, R.raw.aula_104);
                             a104 = 0;
@@ -160,6 +172,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
 
                     case aula105:
+                        appendered(dbl_red, bssid_red);
                         if (dbl_red >= decibelios && a105 == 1){
                             playaudio(context, R.raw.aula_105);
                             a105 = 0;
@@ -167,6 +180,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
 
                     case aula106:
+                        appendered(dbl_red, bssid_red);
                         if (dbl_red >= decibelios && a106 == 1){
                             playaudio(context, R.raw.aula_106);
                             a106 = 0;
@@ -174,6 +188,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
 
                     case aula201:
+                        appendered(dbl_red, bssid_red);
                         if (dbl_red >= decibelios && a201 == 1){
                             playaudio(context, R.raw.aula_201);
                             a201 = 0;
@@ -181,6 +196,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
 
                     case aula202:
+                        appendered(dbl_red, bssid_red);
                         if (dbl_red >= decibelios && a202 == 1){
                             playaudio(context, R.raw.aula_202);
                             a202 = 0;
@@ -188,6 +204,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
 
                     case aula203:
+                        appendered(dbl_red, bssid_red);
                         if (dbl_red >= decibelios && a203 == 1){
                             playaudio(context, R.raw.aula_203);
                             a203 = 0;
@@ -195,6 +212,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
 
                     case aula204:
+                        appendered(dbl_red, bssid_red);
                         if (dbl_red >= decibelios && a204 == 1){
                             playaudio(context, R.raw.aula_204);
                             a204 = 0;
@@ -202,6 +220,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
 
                     case aula205:
+                        appendered(dbl_red, bssid_red);
                         if (dbl_red >= decibelios && a205 == 1){
                             playaudio(context, R.raw.aula_205);
                             a205 = 0;
@@ -209,6 +228,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
 
                     case aula206:
+                        appendered(dbl_red, bssid_red);
                         if (dbl_red >= decibelios && a206 == 1){
                             playaudio(context, R.raw.aula_206);
                             a206 = 0;
@@ -216,6 +236,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
 
                     case aula301:
+                        appendered(dbl_red, bssid_red);
                         if (dbl_red >= decibelios && a301 == 1){
                             playaudio(context, R.raw.aula_301);
                             a301 = 0;
@@ -223,6 +244,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
 
                     case aula302:
+                        appendered(dbl_red, bssid_red);
                         if (dbl_red >= decibelios && a302 == 1){
                             playaudio(context, R.raw.aula_302);
                             a302 = 0;
@@ -230,6 +252,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
 
                     case aula303:
+                        appendered(dbl_red, bssid_red);
                         if (dbl_red >= decibelios && a303 == 1){
                             playaudio(context, R.raw.aula_303);
                             a303 = 0;
@@ -237,6 +260,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
 
                     case aula304:
+                        appendered(dbl_red, bssid_red);
                         if (dbl_red >= decibelios && a304 == 1){
                             playaudio(context, R.raw.aula_304);
                             a304 = 0;
@@ -244,6 +268,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
 
                     case aula305:
+                        appendered(dbl_red, bssid_red);
                         if (dbl_red >= decibelios && a305 == 1){
                             playaudio(context, R.raw.aula_305);
                             a305 = 0;
@@ -251,6 +276,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
 
                     case aula306:
+                        appendered(dbl_red, bssid_red);
                         if (dbl_red >= decibelios && a306 == 1){
                             playaudio(context, R.raw.aula_306);
                             a306 = 0;
@@ -258,32 +284,6 @@ public class MainActivity extends AppCompatActivity {
                         break;
 
                     default: break;
-                }
-
-                /// == Para que solo se muestren los datos de las redes de los módulos == ///
-               if (bssid_red.equals(adecanato) ||
-                    bssid_red.equals(bmujeres102) ||
-                    bssid_red.equals(bhombres) ||
-                    bssid_red.equals(aula104) ||
-                    bssid_red.equals(aula105) ||
-                    bssid_red.equals(aula106) ||
-                    bssid_red.equals(aula201) ||
-                    bssid_red.equals(aula202) ||
-                    bssid_red.equals(aula203) ||
-                    bssid_red.equals(aula204) ||
-                    bssid_red.equals(aula205) ||
-                    bssid_red.equals(aula206) ||
-                    bssid_red.equals(aula301) ||
-                    bssid_red.equals(aula302) ||
-                    bssid_red.equals(aula303) ||
-                    bssid_red.equals(aula304) ||
-                    bssid_red.equals(aula305) ||
-                    bssid_red.equals(aula306)) {
-                        sb.append("╔════════════════════════╗").append("\n║  ");
-                        sb.append("  << Módulo ESP >>    ").append("║\n║ Mac: ");
-                        sb.append(bssid_red.toUpperCase()).append(" ║\n║ dB: ");
-                        sb.append(dbl_red).append("                ║\n");
-                        sb.append("╚════════════════════════╝\n");
                 }
             }
             tv_redes.setText(sb);
