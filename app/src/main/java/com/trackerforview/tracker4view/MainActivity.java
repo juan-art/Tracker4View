@@ -87,46 +87,6 @@ public class MainActivity extends AppCompatActivity {
     StringBuilder sb = new StringBuilder();
 
     public class WifiReceiver extends BroadcastReceiver {
-        /// Eliminar audio reprodcido
-        public void destruir() {
-            if (play != null && play.isPlaying())
-                play.release();
-        }
-
-        public void hilodelay() {
-            try {
-                Thread.sleep(4000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-
-        public void appendered(int dbl_red, String bssid_red){
-            sb.append("╔════════════════════════╗").append("\n║  ");
-            sb.append("  << Módulo ESP >>    ").append("║\n║ Mac: ");
-            sb.append(bssid_red.toUpperCase()).append(" ║\n║ dB: ");
-            sb.append(dbl_red).append("                ║\n");
-            sb.append("╚════════════════════════╝\n");
-        }
-
-        public void playaudio(final Context context, final int audio){
-            Thread playThread = new Thread() {
-                public void run() {
-                    final Vibrator vibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
-                    destruir();
-                    play = MediaPlayer.create(getApplicationContext(), audio);
-                    assert vibrator != null;
-                    vibrator.vibrate(350);
-                    play.start();
-                    hilodelay();
-                    vibrator.vibrate(350);
-                    play.stop();
-                    destruir();
-                }
-            };
-            playThread.start();
-        }
-
         // Escaneo de redes wifi
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -290,6 +250,49 @@ public class MainActivity extends AppCompatActivity {
             wifiList.clear();
             wifi.startScan();
         }
+
+        /// Eliminar audio reprodcido
+        public void destruir() {
+            if (play != null && play.isPlaying())
+                play.release();
+        }
+
+        // Pausa el hilo para que se reproducir el audio completo
+        public void hilodelay() {
+            try {
+                Thread.sleep(4000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
+        // Agrega los caracteres para que se impriman en la lista los detalles de la red
+        public void appendered(int dbl_red, String bssid_red){
+            sb.append("╔════════════════════════╗").append("\n║  ");
+            sb.append("  << Módulo ESP >>    ").append("║\n║ Mac: ");
+            sb.append(bssid_red.toUpperCase()).append(" ║\n║ dB: ");
+            sb.append(dbl_red).append("                ║\n");
+            sb.append("╚════════════════════════╝\n");
+        }
+
+        // Reproduce el audio en un nuevo hilo de proceso
+        public void playaudio(final Context context, final int audio){
+            Thread playThread = new Thread() {
+                public void run() {
+                    final Vibrator vibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);
+                    destruir();
+                    play = MediaPlayer.create(getApplicationContext(), audio);
+                    assert vibrator != null;
+                    vibrator.vibrate(350);
+                    play.start();
+                    hilodelay();
+                    vibrator.vibrate(350);
+                    play.stop();
+                    destruir();
+                }
+            };
+            playThread.start();
+        }
     }
 
 
@@ -306,8 +309,8 @@ public class MainActivity extends AppCompatActivity {
             if (ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_FINE_LOCATION)!= PackageManager.PERMISSION_GRANTED) {
                 cargarDialogoRecomendacion();
             }
-            //Permiso para el uso de recursos
 
+            //Permiso para el uso de recursos
             int permissionCheck = ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.ACCESS_FINE_LOCATION );
             if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
                 //cargarDialogoRecomendacion();
@@ -385,22 +388,19 @@ public class MainActivity extends AppCompatActivity {
                 cargarDialogoRecomendacion();
             }
         }
-
     }
 
     @Override
     protected void onResume() {
         registerReceiver(receiver, new IntentFilter(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION));
         super.onResume();
-        // para q no se bloquee la pantalla
+        // Para que no se bloquee la pantalla
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-
     }
 
     @Override
     protected void onRestart() {
         super.onRestart();
     }
-
 }
 
