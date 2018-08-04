@@ -39,7 +39,6 @@
             android:id="@+id/tv_redes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Hello World!"
             android:textSize="14sp"
             android:visibility="gone"
             app:fontFamily="@font/source_code_pro"
@@ -146,17 +145,17 @@
         android:layout_marginRight="20dp"
         android:layout_marginTop="13dp"
         android:alpha="0.8"
-        android:background="@android:color/darker_gray"
+        android:background="@color/azuloscuro"
+        android:textColor="@color/azulclaro"
         android:gravity="center"
         android:paddingEnd="7dp"
         android:paddingLeft="7dp"
         android:paddingRight="7dp"
         android:paddingStart="7dp"
         android:text="@string/mostrar_redes"
-        android:textStyle="bold|italic"
         android:textSize="14sp"
+        android:textStyle="bold|italic"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        />
+        app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

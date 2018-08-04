@@ -1,12 +1,11 @@
 <resources>
-    <string name="app_name">Tracker 4View</string>
-    <string name="imagen_de_fondo">Imagen de Fondo</string>
+    <string name="app_name">VoiPer</string>
+    <string name="imagen_de_fondo">Pantalla principal de Vóiper</string>
     <string name="utm">Universidad Técnica de Manabí</string>
     <string name="fci">Facultad de Ciencias Informáticas</string>
     <string name="nombres">Juan Arteaga A. — Kenia Sabando B.</string>
     <string name="right">~ 2018 @AllRightReserved</string>
     <string name="logo_utm">Logo de la UTM</string>
     <string name="logo_fci">Logo de la FCI</string>
-    <string name="mostrar_redes">Mostrar Redes</string>
-    <string name="s_50">50</string>
+    <string name="mostrar_redes">Mostrar Módulos</string>
 </resources>
