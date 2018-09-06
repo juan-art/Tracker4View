@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity{
     // Agregado de la aplicación CLOVER
     // Especificacion de los puntos de referencia
     //-----------------------------------------------------------//----
-    /*final String informatica = "ESP_06A26F";                     //----
+    final String informatica = "ESP_06A26F";                     //----
     final String administracionyauditoria = "ESP_06A263";        //----
     final String Rocas = "ESP_06A09D";                           //----
     //-----------------------------------------------------------//----
@@ -105,7 +105,7 @@ public class MainActivity extends AppCompatActivity{
     int banderaaudiizq = 1;                       //--
     int banderaIzqRocasptoRocas = 1;              //--
     int puntofci = 0;                             //--
-    int x = 40;                                   //--*/
+    int x = 40;                                   //--
     //--------------------------------------------//--
 
     public class WifiReceiver extends BroadcastReceiver{
@@ -118,7 +118,7 @@ public class MainActivity extends AppCompatActivity{
             for (int i=0; i<wifiList.size(); i++){
                 int dbl_red = wifiList.get(i).level;
                 String bssid_red = wifiList.get(i).BSSID;
-                /*String ssid_red = wifiList.get(i).SSID;
+                String ssid_red = wifiList.get(i).SSID;
 
                 //------------Ajuste deteccion de redes------------- (CLOVER)
                 int AADMIN =  -x-10; // -75; //Acercadose admin
@@ -126,7 +126,7 @@ public class MainActivity extends AppCompatActivity{
                 int AFCI =    -x;    // -65; //Acercadose FCI
                 int PFCI =    -x;    // -65; //FCI punto de deteccion REF -75 CERCA -60 MAS CERCA
                 int AROCAS =  -x-10; // -75; //Acercadose ROCAS
-                int PROCAS =  -x;    // -65; //ROCAS punto de deteccion*/
+                int PROCAS =  -x;    // -65; //ROCAS punto de deteccion
 
                 /// == Condiciones para reproducir los audios de cada aula == ///
                 switch (bssid_red){
@@ -278,7 +278,7 @@ public class MainActivity extends AppCompatActivity{
                 }
 
                 // Condiciones de CLOVER //
-                /*switch(ssid_red){
+                switch(ssid_red){
                     case administracionyauditoria: {
                         appendered(dbl_red, bssid_red, sb);
                         if (dbl_red <= AADMIN){
@@ -391,7 +391,7 @@ public class MainActivity extends AppCompatActivity{
                     puntoDptoRocas = 0;
                     banderaIzqRocasptoRocas = 0;
                     puntoFci = 0;
-                }*/
+                }
             }
             tv_redes.setText(sb);
             wifiList.clear();
